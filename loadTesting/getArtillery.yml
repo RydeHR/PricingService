@@ -2,13 +2,15 @@ config:
   target: 'http://localhost:3000'
   processor: "./artillery-get-functions.js"
   phases:
-    - duration: 20
-      arrivalRate: 1000
+    - duration: 60
+      arrivalRate: 1
   defaults:
     headers:
       x-my-service-auth: ''
 scenarios:
-  - flow:
-    - function: "generateRandomData"
-    - get:
-        url: "{{ areacode }}"
+    - flow:
+        - loop:
+            - function: "generateRandomData"
+            - get:
+                url: "{{ areacode }}"
+          count: 200

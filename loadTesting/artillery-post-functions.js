@@ -13,7 +13,9 @@ function generateRandomData(userContext, events, done) {
   fakeDate = JSON.parse(fakeDate);
   // add variables to virtual user's context:
   var areacode = Math.floor(Math.random() * 201);
+  var success = Math.round(Math.random());
   userContext.vars.date = fakeDate;
   userContext.vars.areacode = areacode;
+  userContext.vars.success = Number(success);
   return done();
 }

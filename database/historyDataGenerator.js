@@ -82,6 +82,9 @@ var generator = function() {
   } else {
   	var multiplier = 1;
   }
+  if (multiplier < 1) {
+    multiplier = 1;
+  }
   var date = faker.date.between('2011-01-01', '2017-12-31');
   date = JSON.stringify(date);
   date = date.split('T').join(' ');
@@ -89,51 +92,51 @@ var generator = function() {
   var bias = Math.random();
   if (multiplier > 7) { 
   	if (bias > 0.95) {
-      var success = 'true';
+      var success = 1;
   	} else {
-  	  var success = 'false';
+  	  var success = 0;
   	}
   }
 
   if (multiplier > 5) {
   	if (bias > 0.8) {
-  	  var success = 'true';
+  	  var success = 1;
   	} else {
-  	  var success = 'false';
+  	  var success = 0;
   	}
   }
 
   if (multiplier > 3) {
   	if (bias > 0.65) {
-  	  var success = 'true';
+  	  var success = 1;
   	} else {
-  	  var success = 'false';
+  	  var success = 0;
   	}
   }
 
   if (multiplier > 1) {
   	if (bias > 0.5) {
-  	  var success = 'true';
+  	  var success = 1;
   	} else {
-  	  var success = 'false';
+  	  var success = 0;
   	}
   } 
 
   if (multiplier === 1) {
   	if (bias > 0.35) {
-  	  var success = 'true';
+  	  var success = 1;
   	} else {
-  	  var success = 'false';
+  	  var success = 0;
   	}
   } else {
-  	var success = 'true';
+  	var success = 1;
   }
   output.push(areaCode, JSON.stringify(date), multiplier, success)
   return output;
 }
 
 
-let writeStream = fs.createWriteStream('testHistory.txt');
+let writeStream = fs.createWriteStream('finalData.txt');
 
 for (var i = 0; i < 10000000; i++) {
   var row = generator().join(',');

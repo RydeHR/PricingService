@@ -24,13 +24,11 @@ CREATE TABLE pricing3 (
     PRIMARY KEY(areacode, date_time, uid)
 ) WITH CLUSTERING ORDER BY (date_time DESC);
 
--- areaCode, JSON.stringify(date), multiplier, success
-
-CREATE TABLE testpricing (
+CREATE TABLE pricing4 (
     uid int,
     areacode int, 
     date_time timestamp,
     multiplier decimal,
-    success varchar,
-    PRIMARY KEY(areacode, date_time, success)
+    success int,
+    PRIMARY KEY(areacode, date_time)
 ) WITH CLUSTERING ORDER BY (date_time DESC);
