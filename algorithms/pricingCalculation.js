@@ -18,21 +18,40 @@ let distanceInKmBetweenEarthCoordinates = function(lat1, lon1, lat2, lon2) {
   return earthRadiusKm * c;
 }
 
-console.log(distanceInKmBetweenEarthCoordinates(51.5, 0, 38.8, -77.1))
-
-let pricingCalculation = function(fromLoc, toLoc) {
+let pricingCalculation = function(fromLoc, toLoc, multiplier = 1) {
   // fromLoc = [lat, long]
   // toLoc = [lat, long]
+  // console.log(fromLoc)
+  // console.log(toLoc)
+  // console.log(fromLoc[0])
+  fromLoc = JSON.parse(fromLoc);
+  toLoc = JSON.parse(toLoc);
+  // console.log(fromLoc[0])
+  if (fromLoc[0] > 85 || toLoc[0] > 85 || fromLoc[0] < -85 || toLoc[0] < -85 || fromLoc[1] > 180 || fromLoc[1] < -180 || toLoc[1] > 180 || toLoc[0] < -180) {
+  	console.log('invalid coordinates');
+  	return null;
+  } 
+
+  if (isNaN(Number(fromLoc[0])) || isNaN(Number(fromLoc[1])) || isNaN(Number(toLoc[0])) || isNaN(Number(toLoc[1]))) {
+  	console.log('coordinates are NaN');
+  	return null;
+  }
+
   let distance = distanceInKmBetweenEarthCoordinates(fromLoc[0], fromLoc[1], toLoc[0], toLoc[1]);
-  return distance * 1.5;
+  console.log('success! distance is', distance)
+  return multiplier * distance * 1.5;
 }
 
-// console.log(console.log(Faker.fake("{{address.latitude}}, {{address.longitude}}")))
+// console.log(Faker.fake("{{address.latitude}}, {{address.longitude}}"))
 // var fromLoc = Faker.fake("{{address.latitude}}, {{address.longitude}}");
 // fromLoc = fromLoc.split(',');
 // var toLoc = Faker.fake("{{address.latitude}}, {{address.longitude}}");
 // toLoc = toLoc.split(',');
-// console.log(typeof fromLoc)
+// console.log(type, 1of fromLoc)
 // // console.log(fromLoc.split(','))
 
-// console.log(pricingCalculation(fromLoc, toLoc))
+// console.log(pricingCalculation(fromLoc, toLoc, 1))
+
+module.exports = {
+	pricingCalculation
+}

@@ -11,6 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.188.0",
     "cassandra-driver": "^3.3.0",
+    "chai": "^4.1.2",
     "csvtojson": "^1.1.9",
     "dotenv": "^5.0.0",
     "express-cassandra": "^2.1.1",
@@ -21,10 +22,16 @@
     "koa-route": "^3.2.0",
     "koa-router": "^7.4.0",
     "ml-knn": "^2.1.3",
+    "mocha": "^5.0.0",
     "mongoose": "^5.0.3",
     "newrelic": "^2.7.0",
     "nodemon": "^1.14.11",
     "os": "^0.1.1",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {
+    "chai-http": "^3.0.0",
+    "should": "^13.2.1"
   }
 }

@@ -1,6 +1,7 @@
 const cassandra = require('cassandra-driver');
 const client = new cassandra.Client({ contactPoints: ['127.0.0.1'] })
 
+
 client.connect(function(err) {
   if (err) {
   	console.log(err)

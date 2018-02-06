@@ -20,6 +20,46 @@ let save = (params) => {
   });
 }
 
+let updateSurge = (params) => {
+  var query = {'areacode': params.areacode};
+  surgeList.findOneAndUpdate(query, { $set: {'areacode': params.areacode, 'multiplier': params.multiplier} }, {upsert: true, returnNewDocument: true}).then((result) => {
+    // console.log(result);
+    return result;
+  })
+}
+
+let getSurgeByArea = (areacode) => {
+  return surgeList.find({"areacode": areacode}).then((result) => {
+    // console.log('result in getSurgeByArea', result);
+    if (result.length > 0) {
+      return result[0].multiplier;  
+    } else {
+      return undefined;
+    }
+  	
+  });
+}
+
+module.exports = {
+  getSurgeByArea,
+  updateSurge,
+  save
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // var query = {'username':req.user.username};
 // req.newData.username = req.user.username;
 // MyModel.findOneAndUpdate(query, req.newData, {upsert:true}, function(err, doc){
@@ -27,32 +67,22 @@ let save = (params) => {
 //     return res.send("succesfully saved");
 // });
 
-let updateSurge = (params) => {
-  var query = {'areacode': params.areacode};
-  surgeList.findOneAndUpdate(query, {'areacode': params.areacode, 'multiplier': params.multiplier}).then((result) => {
-    console.log(result);
-  })
-}
+// db.scores.findOneAndUpdate(
+//    { "name" : "A.B. Abracus" },
+//    { $set: { "name" : "A.B. Abracus", "assignment" : 5}, $inc : { "points" : 5 } },
+//    { sort: { "points" : 1 }, upsert:true, returnNewDocument : true }
+// );
 
-let getSurgeByArea = (areacode) => {
-  // console.log('here', areacode)
-  return surgeList.find({"areacode": areacode}).then((result) => {
-  	console.log(result)
-  	return result;
-  });
-  // query.select('multiplier');
-  // query.exec(callback)
-}
 
-var listObj = new surgeList({"areacode": 7, "surge": 2.2});
-listObj.save(function(err) {
-  if (err) {
-    console.log(err);
-  }
-})
+
+
+
+// var listObj = new surgeList({"areacode": 8, "multiplier": 2.2});
+// listObj.save(function(err) {
+//   if (err) {
+//     console.log(err);
+//   }
+// })
+
+// surgeList.getSurgeByArea(8);
 // surgeList.insert({"areacode": 7, "surge" : 2.2})
-module.exports = {
-  getSurgeByArea,
-  updateSurge,
-  save
-}

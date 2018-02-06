@@ -1,5 +1,5 @@
 const cass = require('../database/csIndex.js');
-const mongo = require('../database/mongoIndex.js');
+// const mongo = require('../database/mongoIndex.js');
 // does initial load from Cassandra DB 
 
 // reads in data from the SQS Queue from Jackie
