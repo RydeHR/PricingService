@@ -11,9 +11,10 @@ var getAreaCodeSuccess = async function(areacode) {
   });
 }
 
-var getSurgeByAreaCode = function(areacode,  drivers, riders) {
+var getSurgeByAreaCode = async function(areacode,  drivers, riders) {
   var adjustFactor;
-  var multiplyFactor = getAreaCodeSuccess(areacode);
+  var multiplyFactor = await getAreaCodeSuccess(areacode);
+  // console.log('multiply factor is', multiplyFactor);
   if (riders / drivers > 1.35) {
   	// charge very high
   	adjustFactor = Number(((Math.random() + 1) * 5).toFixed(1))
@@ -41,7 +42,11 @@ var getSurgeByAreaCode = function(areacode,  drivers, riders) {
   	return 1 * adjustFactor;
   } else {
   	// charge a lower multiplier
-  	return 0.85 * adjustFactor;
+    if (adjustFactor * 0.85 < 1) {
+      return 1;
+    } else {
+  	  return 0.85 * adjustFactor;
+    }
   }
 }
 

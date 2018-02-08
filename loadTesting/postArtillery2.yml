@@ -1,0 +1,17 @@
+config:
+  target: 'http://localhost:3000'
+  processor: "./artillery-generate-functions.js"
+  phases:
+    - duration: 20
+      arrivalRate: 5
+  defaults:
+    headers:
+      'Content-Type' : application/json
+scenarios:
+  - flow:
+      - loop:
+          - function: "generateMarketData"
+          - post:
+              url: "/market"
+              json: {"areacode" : "{{ areacode3 }}", "drivers": "{{ drivers }}", "riders": "{{ riders }}" }
+        count: 5

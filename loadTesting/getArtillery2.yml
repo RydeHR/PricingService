@@ -1,0 +1,20 @@
+config:
+  target: 'http://localhost:3000'
+  processor: "./artillery-generate-functions.js"
+  phases:
+    - duration: 60
+      arrivalRate: 4
+  defaults:
+    headers:
+      x-my-service-auth: ''
+scenarios:
+    - name:  
+      flow:
+        - loop:
+            - function: "generatePostData"
+            - post:
+                url: "/market"
+                json: {"areacode" : "{{ areacode2 }}", date_time : "{{ date }}", "multiplier": "{{ multiplier }}"  , "success" : "{{ success }}", "uid" : 111111111} 
+            - get:
+                url: "{{ url }}"
+          count: 20

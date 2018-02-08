@@ -38,7 +38,7 @@ describe('getAverageMultiplierByAreaCode', function() {
 
 describe('getAverageSuccessByAreaCode', function() {
    it ('responds with type number', async function() {
-  	const requests = await db.getAverageSuccess	ByAreaCode(9);
+  	const requests = await db.getAverageSuccessByAreaCode(9);
   	var type = typeof requests;
   	type.should.equal('number');
   })

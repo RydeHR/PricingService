@@ -1,0 +1,19 @@
+config:
+  target: 'http://localhost:3000'
+  processor: "./artillery-generate-functions.js"
+  phases:
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 200
+      name: 'warm up the application'
+    - duration: 400
+      arrivalRate: 200
+      name: 'sustained max load'
+  defaults:
+    headers:
+      x-my-service-auth: ''
+scenarios:
+    - flow:
+        - function: "generateGetData"
+        - get:
+            url: "{{ areacode }}"
